@@ -1,18 +1,16 @@
 (function() {
     "use strict";
 
-    var vehicle1 =  new Vehicle('VW', 'up', 'CA1111CA');
+    var vehicle1 =  new Vehicle('VW', 'up', 'CA1111CA', 'electricity', 30);
     vehicle1.drive(123);
-    console.log(vehicle1.miliage);
+    vehicle1.loadFuel(50, 'electricity');
+    console.log(vehicle1.fuelQty);
 
-    var vehicle2 =  new Vehicle('VW', 'up', 'CA2222CA');
+    var vehicle2 =  new Vehicle('VW', 'up', 'CA2222CA', 'PEtrol', 40);
     vehicle2.drive(123);
-    console.log(vehicle2.miliage);
+    vehicle2.loadFuel(50, 'petrol');    
+    console.log(vehicle2.fuelQty);
+    console.log(vehicle1.toString());
+    console.log(vehicle2.toString());
 
-    vehicle1.drive(124);
-    console.log(vehicle1.miliage);
-    debugger;
-    vehicle2.drive(556);
-    console.log(vehicle2.miliage);
-    
 }());

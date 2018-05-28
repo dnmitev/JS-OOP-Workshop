@@ -9,12 +9,20 @@ var Vehicle = (function () {
 
     const LICENSE_NUM_LENGTH = 8;
 
+    const MAX_DISTANCE = 1000;
+
+    const FUEL_TYPES = ['lpg', 'diesel', 'petrol', 'electricity'];
+
     class Vehicle {
-        constructor(make, model, licenseNum) {
+        constructor(make, model, licenseNum, fuelType, tankVol) {
             this.make = make;
             this.model = model;
             this.licenseNum = licenseNum;
+            this.fuelType = fuelType;
+            this.tankVol = tankVol;
+
             this._miliage = 0;
+            this._fuelQty = 0;
         }
 
         set make(value) {
@@ -57,9 +65,52 @@ var Vehicle = (function () {
             return this._miliage;
         }
 
+        get tankVol() {
+            return `${this._tankVol}l.`;
+        }
+
+        set tankVol(value) {
+            // TODO: validate
+            this._tankVol = value;
+        }
+
+        get fuelType() {
+            return this._fuelType.toUpperCase();
+        }
+
+        set fuelType(value) {
+            if (FUEL_TYPES.indexOf(value.toLowerCase()) < 0) {
+                throw new Error(`${value} was not found in ${FUEL_TYPES.join('|')}`)
+            }
+
+            this._fuelType = value;
+        }
+
+        get fuelQty() {
+            return this._fuelQty;
+        }
+
         drive(distance) {
             // TODO: Validate distance
             this._miliage += distance;
+            if (this._miliage >= MAX_DISTANCE) {
+                this._miliage = this._miliage - MAX_DISTANCE;
+            }
+        }
+
+        loadFuel(fuelQty, fuelType) {
+            // TODO: Validate fuelQty
+            if (fuelType.toLowerCase() === this.fuelType.toLowerCase()) {
+                this._fuelQty += fuelQty;
+            } else {
+                throw new Error(
+                    `Loading fuel failed. Invalid fuel type: ${fuelType}. 
+                    Expected fuel: ${this.fuelType}`);
+            }
+        }
+
+        toString() {
+            return `Make: ${this.make}; Model: ${this.model}; License: ${this.licenseNum}`;
         }
     }
 
