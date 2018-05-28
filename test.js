@@ -29,4 +29,9 @@
     if (found && found.length) {
         console.log('FOUND!!!!');
     }
+
+    var yamaha = new Bike('Yamaha', 'R1', 'PB2333AB', 30, "TOURING");
+    console.log(yamaha.toString());
+    g.parkVehicle(yamaha);
+    console.log(g.getVehiclesListSorted());    
 }());
