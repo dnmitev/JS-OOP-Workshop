@@ -26,9 +26,9 @@ var Vehicle = (function () {
         }
 
         set make(value) {
-            _validateStringLength(
+            Validator.validateStringLength(
                 value, MIN_MAKE_LENGTH, MAX_MAKE_LENGTH, 'make');
-            _validateType(value, 'string');
+            Validator.validateType(value, 'string');
 
             this._make = value;
         }
@@ -38,9 +38,9 @@ var Vehicle = (function () {
         }
 
         set model(value) {
-            _validateStringLength(
+            Validator.validateStringLength(
                 value, MIN_MODEL_LENGTH, MAX_MODEL_LENGTH, 'model');
-            _validateType(value, 'string');
+            Validator.validateType(value, 'string');
 
             this._model = value;
         }
@@ -50,9 +50,9 @@ var Vehicle = (function () {
         }
 
         set licenseNum(value) {
-            _validateStringLength(
+            Validator.validateStringLength(
                 value, LICENSE_NUM_LENGTH, LICENSE_NUM_LENGTH, 'licenseNum');
-            _validateType(value, 'string');
+            Validator.validateType(value, 'string');
 
             this._licenseNum = value;
         }
@@ -111,19 +111,6 @@ var Vehicle = (function () {
 
         toString() {
             return `Make: ${this.make}; Model: ${this.model}; License: ${this.licenseNum}`;
-        }
-    }
-
-    function _validateStringLength(str, min, max, prop) {
-        if (str.length < min || str.length > max) {
-            throw new RangeError(
-                `Invalid range for vehicle's ${prop}: ${str} -> ${str.length}. Range - [${min}-${max}]`);
-        }
-    }
-
-    function _validateType(value, expectedType, prop) {
-        if (typeof (value) !== expectedType) {
-            throw new TypeError(`Invalid ${prop} type. Type was expected to be ${expectedType}`);
         }
     }
 
